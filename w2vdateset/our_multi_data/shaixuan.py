@@ -3,10 +3,9 @@ import os
 import re
 
 
-
-dict_files_path=r'C:\Users\luxun\Desktop\testdata\ted3_hubert_hypo.word.we.name'
-filepath=r'E:\ASR\english\NLP\trans\ted3_mms.txt'
-outfile_path='ted3_post_hubert.txt'
+dict_files_path='out/jpn_ref_we.txt'
+filepath='evl.txt'
+outfile_path='out/jpn_evl_post.txt'
 
 def read_ref_file(filepath):  
     """  
@@ -17,11 +16,11 @@ def read_ref_file(filepath):
         with open(filepath, 'r', encoding='utf-8') as file:  
             lines = file.readlines()  
             for line_num, line in enumerate(lines, start=1):  
-                transes = line.split('\t')
-                file_dict[transes[0].strip()]=' '.join(transes[1:])
+                transes = line.split(' ')
+                file_dict[transes[0]]=transes[1]
     except FileNotFoundError:  
         print(f"文件 {filepath} 未找到。")
-    # print((file_dict))
+    # print(file_dict)
     return file_dict  
 
 
@@ -31,13 +30,9 @@ with open(filepath, 'r', encoding='utf-8') as file, open(
     lines = file.readlines()  
     filedict=read_ref_file(dict_files_path)
     for line_num, line in enumerate(lines, start=1):  
-        whispertxt = line.split(' ')[0]
-        whispertxt = line.strip()
-        print(whispertxt)
-        if whispertxt in filedict:
-            # outfile.writelines(whispertxt+' '+filedict[whispertxt])
-            print(whispertxt+' '+filedict[whispertxt])
-            print(whispertxt+' '+filedict[whispertxt].strip(),file=outfile)
+        whispertxt = line.split(' ')
+        if whispertxt[0] in filedict:
+            outfile.writelines(line)
 
 
 
