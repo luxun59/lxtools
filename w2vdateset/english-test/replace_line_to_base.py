@@ -15,11 +15,11 @@ def read_ref_file_to_lower(filepath):
         with open(filepath, 'r', encoding='utf-8') as file:  
             lines = file.readlines()  
             for line_num, line in enumerate(lines, start=1):  
-                transes = line.split(' ')
-                file_dict[transes[0]]=transes[1].lower()
+                transes = line.split('\t')
+                file_dict[transes[0]]=transes[1].lower().strip()
     except FileNotFoundError:  
         print(f"文件 {filepath} 未找到。")
-    # print(file_dict)
+    print(file_dict)
     return file_dict  
 
 
@@ -43,9 +43,10 @@ with open(file_name, 'r', encoding='utf-8') as file, open(
     lines = file.readlines()  
     filedict=read_ref_file_to_lower(dict_files_path)
     for line_num, line in enumerate(lines, start=1):  
-        lineNone = line.split(' ')[0]
+        lineNone = line.split('\t')[0]
+        linetext=line.split('\t')[1].strip()
         if lineNone in filedict:
-            print('{} {}'.format(filedict[lineNone],line[1:]),outfile=outfile)
+            print('{}\t{}'.format(filedict[lineNone],linetext),file=outfile)
 
 
 

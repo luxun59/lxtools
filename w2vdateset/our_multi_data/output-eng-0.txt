@@ -1,0 +1,9 @@
+audio/test/sample-000012.wav
+audio/test/sample-000005.wav	 Pull this lever to activate the piston.
+audio/test/sample-000006.wav	 She likes you.
+audio/test/sample-000002.wav	 Science has been arguing about the zoological classification of the species for decades.
+audio/test/sample-000003.wav	 He wasn't asking for help. 
+audio/test/sample-000004.wav	 But he granted the travelers 3 days.
+audio/test/sample-000001.wav	 Will it be warmer Montana?
+audio/test/sample-000000.wav	 You killed all three of them for nothing. 
+audio/test/sample-000007.wav	 They'll believe him. 

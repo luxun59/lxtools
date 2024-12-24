@@ -2,6 +2,16 @@
 Author: luxun luxun59@126.com
 Date: 2024-11-07 20:20:48
 LastEditors: luxun luxun59@126.com
+LastEditTime: 2024-11-13 10:05:01
+FilePath: \lxtools\w2vdateset\english-test\copy_from_tsv_to_dir.py
+Description: 
+
+Copyright (c) 2024 by luxun59@126.com, All Rights Reserved. 
+'''
+'''
+Author: luxun luxun59@126.com
+Date: 2024-11-07 20:20:48
+LastEditors: luxun luxun59@126.com
 LastEditTime: 2024-11-07 20:25:25
 FilePath: \lxtools\w2vdateset\english-test\copy_from_tsv_to_dir.py
 Description: 
