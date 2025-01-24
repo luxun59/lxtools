@@ -27,7 +27,7 @@ def remove_and_conditionally_space_punctuation(text):
     i = 0
     while i < len(text):
         char = text[i]
-        if char in ["\""]:
+        if char in ["\'"]:
             pass
         elif char in ["—"]:
             i+=1

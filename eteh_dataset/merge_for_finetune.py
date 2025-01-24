@@ -10,14 +10,24 @@ target_percent=float(sys.argv[4])  #目标域数据比例
 
 
 
-source_wavscp = source_name+".wavscp"
+# source_wavscp = os.path.join(source_name,".wav.scp")
+# source_text = os.path.join(source_name,".text")
+
+# target_wavscp = os.path.join(target_name,".wav.scp")
+# target_text = os.path.join(target_name,".text")
+
+# output_wavscp = os.path.join(output_name,".wav.scp")
+# output_text = os.path.join(output_name,".text")
+
+source_wavscp = source_name+".wav.scp"
 source_text = source_name+".text"
 
-target_wavscp = target_name+".wavscp"
+target_wavscp = target_name+".wav.scp"
 target_text = target_name+".text"
 
-output_wavscp = output_name+".wavscp"
+output_wavscp = output_name+".wav.scp"
 output_text = output_name+".text"
+
 
 source_num=0
 
@@ -43,7 +53,7 @@ with open(source_wavscp,"r",encoding="utf-8") as f:
     source_num = len(source_wavscp_lines)
     split_percent = source_output_num/source_num
     if split_percent>1:
-        print("target num is too small, all data will be used!")
+        print("source num is too small, all data will be used!")
         split_percent=1
     for line in source_wavscp_lines:
         line=line.strip()
@@ -82,7 +92,6 @@ with open(output_text,"w",encoding="utf-8") as fout:
             parts=line.split(" ")
             if parts[0] in dict_source_wavscp:
                 fout.write(line+"\n")
-
 
 
 
