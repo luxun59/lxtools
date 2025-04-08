@@ -2,7 +2,7 @@
 Author: luxun luxun59@126.com
 Date: 2025-04-08 15:19:59
 LastEditors: luxun luxun59@126.com
-LastEditTime: 2025-04-08 15:32:36
+LastEditTime: 2025-04-08 15:43:26
 FilePath: \lxtools\common_dataset\speed_perturb.py
 Description: 
 
@@ -29,6 +29,7 @@ output_scp = args.output_scp
 speed_factors = args.speed_factors
 text_file = args.input_text
 output_text = args.output_text
+output_text_file = None 
 
 # Ensure output directory exists
 os.makedirs(output_dir, exist_ok=True)
@@ -41,7 +42,7 @@ if text_file and output_text:
             if len(parts) == 2:
                 utt_id, text = parts
                 text_mapping[utt_id] = text
-    output_text
+    output_text_file= open(output_text, 'w')
 
 with open(wav_scp, 'r') as fin, open(output_scp, 'w') as fout:
     for line in fin:
@@ -56,7 +57,7 @@ with open(wav_scp, 'r') as fin, open(output_scp, 'w') as fout:
             cmd = [
                 'sox', wav_path, output_path,
                 'speed', str(speed),
-                'rate', '16k'  # Ensure sample rate remains the same (change to your desired rate)
+                'rate', '8k'  # Ensure sample rate remains the same (change to your desired rate)
             ]
 
             print(f"Running: {' '.join(cmd)}")
@@ -64,3 +65,10 @@ with open(wav_scp, 'r') as fin, open(output_scp, 'w') as fout:
 
             # Write new wav.scp entry
             fout.write(f"{new_utt_id} {output_path}\n")
+            if output_text_file is not None:
+                # Write new text entry
+                if utt_id in text_mapping:
+                    new_text = text_mapping[utt_id]
+                    output_text_file.write(f"{new_utt_id} {new_text}\n")
+                else:
+                    print(f"Warning: No text found for {utt_id}, skipping text entry.")
