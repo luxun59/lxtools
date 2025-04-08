@@ -19,7 +19,7 @@ parser.add_argument('--input_text', type=str,default=None, help='Input text file
 parser.add_argument('--output_dir', type=str, help='Output directory for perturbed wavs')
 parser.add_argument('--output_scp', type=str, help='Output wav.scp file path')
 parser.add_argument('--output_text', type=str,default=None, help='Output text file path')
-parser.add_argument('--speed_factors', type=float, default=1.1 ,nargs='+', help='Speed factors for perturbation')
+parser.add_argument('--speed_factors', type=float, default=[1.1] ,nargs='+', help='Speed factors for perturbation')
 args = parser.parse_args()
 
 # Set the values from command line arguments
