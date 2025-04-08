@@ -2,7 +2,7 @@
  * @Author: luxun luxun59@126.com
  * @Date: 2024-12-31 16:28:58
  * @LastEditors: luxun luxun59@126.com
- * @LastEditTime: 2025-01-14 15:11:59
+ * @LastEditTime: 2025-04-08 10:00:10
  * @FilePath: \lxtools\help.md
  * @Description: 
  * 
@@ -37,7 +37,7 @@ Ctrl+b [number]：切换到指定编号的窗口，其中的[number]是状态栏
 Ctrl+b w：从列表中选择窗口。
 Ctrl+b ,：窗口重命名。
 Ctrl+b [: 拷贝模式可翻页 q退出
-
+Ctrl+b %左右分屏
 
 
 
@@ -50,7 +50,10 @@ useBinWfst=false#true
 useGreedy=true
 
 
-
+## huggingface-cli
+下载数据集
+``huggingface-cli download --repo-type dataset --resume-download "jp1924/KsponSpeech" --local-dir jp1924-KsponSpeech``
+下载模型
 
 
 

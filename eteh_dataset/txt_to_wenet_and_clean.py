@@ -1,23 +1,23 @@
 '''
 Author: luxun luxun59@126.com
-Date: 2024-11-13 21:32:53
-LastEditors: luxun luxun59@126.com
-LastEditTime: 2024-11-13 21:50:28
-FilePath: \lxtools\w2vdateset\our_multi_data\read_we_to_zhuhan.py
-Description: 
+Date: 2024-10-22 09:32:07
+LastEditors: luxun59 luxun59@126.com
+LastEditTime: 2025-02-09 23:10:12
+FilePath: \lxtools\eteh_dataset\txt_to_wenet_and_clean.py
+Description: from a ref.txt type: xxxx(xxx/xxx.wav) 
+                                  xxxx(xxx/xxx.wav) 
+
+             to                   xxx.wav xxxx                     
 
 Copyright (c) 2024 by luxun59@126.com, All Rights Reserved. 
 '''
-
-
-
 
 import argparse
 import os
 import re
 import sys
 
-def read_wenet_and_write_to_ref(infilepath,outfilepath):  
+def read_ref_file_and_write_to_wenet(infilepath,outfilepath):  
     """  
     读取ref.txt文件并返回一个字典，键是文件名，值是该文件名所在行的前面字符串和行号。  
     """  
@@ -28,15 +28,14 @@ def read_wenet_and_write_to_ref(infilepath,outfilepath):
             lines = infile.readlines()  
             for line_num, line in enumerate(lines, start=1):  
                 # 查找括号内的文件名   
-                # match = re.search(r'\((.*?)\)', line)  
-                line_list=line.split(' ')
+                match = re.search(r'\((.*?)\)', line)  
                 # print("line",line)
-                if len(line_list)>1:  
-                    filename = line_list[0] 
-                    filename = os.path.basename(filename).split('.')[0]
-                    prefix = ' '.join(line_list[1:]).strip()  
+                if match:  
+                    filename = match.group(1)  
+                    # filename = os.path.basename(filename)
+                    prefix = line[:match.start()].strip()  
                     file_dict[filename.strip()] = prefix
-                    outfile.writelines(prefix+' ('+filename+')''\n')
+                    outfile.writelines(filename.strip()+' '+prefix+'\n')
 
     except FileNotFoundError:  
         print(f"文件 {infilepath} 未找到。")
@@ -49,20 +48,13 @@ if len(sys.argv)<2:
     output_name = '/data/home/luxun/dataset/testset/manifest/data_eval.tsv.base'
 elif len(sys.argv)==2:
     file_name=sys.argv[1] 
-    output_name=file_name+'.ref'
+    output_name=file_name+'.we'
 else:
     file_name=sys.argv[1]   
     output_name=sys.argv[2]   
 
 
-read_wenet_and_write_to_ref(file_name,output_name)
+read_ref_file_and_write_to_wenet(file_name,output_name)
 # read_ref_file_and_write_to_wenet('ref.txt','kor_ref_we.txt')
 # read_ref_file_and_write_to_wenet('evltest_8k_split_ref.txt','jpn_ref_we.txt')
-
-
-
-
-
-
-
 
