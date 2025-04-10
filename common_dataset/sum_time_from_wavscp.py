@@ -51,4 +51,5 @@ if __name__ == "__main__":
         wav_scp_path = 'wav.scp'
 
     total_duration = calculate_total_duration(wav_scp_path)
-    print(f"当前wavscp对应音频文件的总时长为: {total_duration:.2f} 秒")
+    total_duration_h = total_duration/3600
+    print(f"当前wavscp对应音频文件的总时长为: {total_duration:.2f} 秒 {total_duration_h:.2f} h")
