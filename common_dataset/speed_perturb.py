@@ -2,7 +2,7 @@
 Author: luxun luxun59@126.com
 Date: 2025-04-08 15:19:59
 LastEditors: luxun luxun59@126.com
-LastEditTime: 2025-04-08 15:43:26
+LastEditTime: 2025-04-08 20:11:35
 FilePath: \lxtools\common_dataset\speed_perturb.py
 Description: 
 
@@ -17,7 +17,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, help='Input wav.scp file')
 parser.add_argument('--input_text', type=str,default=None, help='Input text file')
 parser.add_argument('--output_dir', type=str, help='Output directory for perturbed wavs')
-parser.add_argument('--output_scp', type=str, help='Output wav.scp file path')
+parser.add_argument('--output_wavscp', type=str, help='Output wav.scp file path')
 parser.add_argument('--output_text', type=str,default=None, help='Output text file path')
 parser.add_argument('--speed_factors', type=float, default=[1.1] ,nargs='+', help='Speed factors for perturbation')
 args = parser.parse_args()
@@ -25,7 +25,7 @@ args = parser.parse_args()
 # Set the values from command line arguments
 wav_scp = args.input
 output_dir = args.output_dir
-output_scp = args.output_scp
+output_scp = args.output_wavscp
 speed_factors = args.speed_factors
 text_file = args.input_text
 output_text = args.output_text
@@ -72,3 +72,10 @@ with open(wav_scp, 'r') as fin, open(output_scp, 'w') as fout:
                     output_text_file.write(f"{new_utt_id} {new_text}\n")
                 else:
                     print(f"Warning: No text found for {utt_id}, skipping text entry.")
+
+    # Close the output text file if it was opened   
+    print(f"✅ 处理完成，输出到：{args.output_dir}")
+    print(f"📄 新 wav.scp：{args.output_scp}")
+    if args.input_text and args.output_text:
+        print(f"📄 新文本文件：{args.output_text}")
+        output_text_file.close()
